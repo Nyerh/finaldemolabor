@@ -91,7 +91,20 @@ public class ManagerApi {
     public Msg delLab(@RequestParam(value = "Id") Integer id,
                       @RequestParam(value = "userId") Integer userId)
     {
-        return null;
+        //身份校验
+        //TODO
+        Integer i = labService.delLab(id);
+        if(i==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("删除失败")
+                    .build();
+        }
+        return new Msg().builder()
+                .state(STATUS.SUCCESS)
+                .msg("删除成功")
+                .build();
     }
 
 
