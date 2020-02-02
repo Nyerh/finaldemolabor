@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.domain.entity.Equipment">
+    <!--@mbg.generated-->
+    <id column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="e_name" jdbcType="VARCHAR" property="eName" />
+    <result column="e_model" jdbcType="VARCHAR" property="eModel" />
+    <result column="e_sum" jdbcType="INTEGER" property="eSum" />
+    <result column="e_price" jdbcType="DOUBLE" property="ePrice" />
+    <result column="e_intime" jdbcType="VARCHAR" property="eIntime" />
+    <result column="e_status" jdbcType="INTEGER" property="eStatus" />
+    <result column="l_id" jdbcType="INTEGER" property="lId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    e_id, e_name, e_model, e_sum, e_price, e_intime, e_status, l_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from equipment
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from equipment
+    where e_id = #{eId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="e_id" keyProperty="eId" parameterType="com.example.demo.domain.entity.Equipment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into equipment (e_name, e_model, e_sum, 
+      e_price, e_intime, e_status, 
+      l_id)
+    values (#{eName,jdbcType=VARCHAR}, #{eModel,jdbcType=VARCHAR}, #{eSum,jdbcType=INTEGER}, 
+      #{ePrice,jdbcType=DOUBLE}, #{eIntime,jdbcType=VARCHAR}, #{eStatus,jdbcType=INTEGER}, 
+      #{lId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="e_id" keyProperty="eId" parameterType="com.example.demo.domain.entity.Equipment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eName != null">
+        e_name,
+      </if>
+      <if test="eModel != null">
+        e_model,
+      </if>
+      <if test="eSum != null">
+        e_sum,
+      </if>
+      <if test="ePrice != null">
+        e_price,
+      </if>
+      <if test="eIntime != null">
+        e_intime,
+      </if>
+      <if test="eStatus != null">
+        e_status,
+      </if>
+      <if test="lId != null">
+        l_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eName != null">
+        #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eModel != null">
+        #{eModel,jdbcType=VARCHAR},
+      </if>
+      <if test="eSum != null">
+        #{eSum,jdbcType=INTEGER},
+      </if>
+      <if test="ePrice != null">
+        #{ePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="eIntime != null">
+        #{eIntime,jdbcType=VARCHAR},
+      </if>
+      <if test="eStatus != null">
+        #{eStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lId != null">
+        #{lId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.domain.entity.Equipment">
+    <!--@mbg.generated-->
+    update equipment
+    <set>
+      <if test="eName != null">
+        e_name = #{eName,jdbcType=VARCHAR},
+      </if>
+      <if test="eModel != null">
+        e_model = #{eModel,jdbcType=VARCHAR},
+      </if>
+      <if test="eSum != null">
+        e_sum = #{eSum,jdbcType=INTEGER},
+      </if>
+      <if test="ePrice != null">
+        e_price = #{ePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="eIntime != null">
+        e_intime = #{eIntime,jdbcType=VARCHAR},
+      </if>
+      <if test="eStatus != null">
+        e_status = #{eStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lId != null">
+        l_id = #{lId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.domain.entity.Equipment">
+    <!--@mbg.generated-->
+    update equipment
+    set e_name = #{eName,jdbcType=VARCHAR},
+      e_model = #{eModel,jdbcType=VARCHAR},
+      e_sum = #{eSum,jdbcType=INTEGER},
+      e_price = #{ePrice,jdbcType=DOUBLE},
+      e_intime = #{eIntime,jdbcType=VARCHAR},
+      e_status = #{eStatus,jdbcType=INTEGER},
+      l_id = #{lId,jdbcType=INTEGER}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+</mapper>

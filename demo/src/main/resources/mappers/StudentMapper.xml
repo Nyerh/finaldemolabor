@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.domain.entity.Student">
+    <!--@mbg.generated-->
+    <id column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="s_name" jdbcType="VARCHAR" property="sName" />
+    <result column="s_sex" jdbcType="VARCHAR" property="sSex" />
+    <result column="s_class" jdbcType="VARCHAR" property="sClass" />
+    <result column="s_col" jdbcType="VARCHAR" property="sCol" />
+    <result column="s_sno" jdbcType="INTEGER" property="sSno" />
+    <result column="s_pwd" jdbcType="VARCHAR" property="sPwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    s_id, s_name, s_sex, s_class, s_col, s_sno, s_pwd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="s_id" keyProperty="sId" parameterType="com.example.demo.domain.entity.Student" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student (s_name, s_sex, s_class, 
+      s_col, s_sno, s_pwd)
+    values (#{sName,jdbcType=VARCHAR}, #{sSex,jdbcType=VARCHAR}, #{sClass,jdbcType=VARCHAR}, 
+      #{sCol,jdbcType=VARCHAR}, #{sSno,jdbcType=INTEGER}, #{sPwd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="s_id" keyProperty="sId" parameterType="com.example.demo.domain.entity.Student" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sName != null">
+        s_name,
+      </if>
+      <if test="sSex != null">
+        s_sex,
+      </if>
+      <if test="sClass != null">
+        s_class,
+      </if>
+      <if test="sCol != null">
+        s_col,
+      </if>
+      <if test="sSno != null">
+        s_sno,
+      </if>
+      <if test="sPwd != null">
+        s_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sName != null">
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null">
+        #{sSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null">
+        #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sCol != null">
+        #{sCol,jdbcType=VARCHAR},
+      </if>
+      <if test="sSno != null">
+        #{sSno,jdbcType=INTEGER},
+      </if>
+      <if test="sPwd != null">
+        #{sPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.domain.entity.Student">
+    <!--@mbg.generated-->
+    update student
+    <set>
+      <if test="sName != null">
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null">
+        s_sex = #{sSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sClass != null">
+        s_class = #{sClass,jdbcType=VARCHAR},
+      </if>
+      <if test="sCol != null">
+        s_col = #{sCol,jdbcType=VARCHAR},
+      </if>
+      <if test="sSno != null">
+        s_sno = #{sSno,jdbcType=INTEGER},
+      </if>
+      <if test="sPwd != null">
+        s_pwd = #{sPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.domain.entity.Student">
+    <!--@mbg.generated-->
+    update student
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_sex = #{sSex,jdbcType=VARCHAR},
+      s_class = #{sClass,jdbcType=VARCHAR},
+      s_col = #{sCol,jdbcType=VARCHAR},
+      s_sno = #{sSno,jdbcType=INTEGER},
+      s_pwd = #{sPwd,jdbcType=VARCHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+</mapper>

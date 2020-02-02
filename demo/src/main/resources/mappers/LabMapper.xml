@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.LabMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.domain.entity.Lab">
+    <!--@mbg.generated-->
+    <id column="l_id" jdbcType="INTEGER" property="lId" />
+    <result column="l_name" jdbcType="VARCHAR" property="lName" />
+    <result column="l_desc" jdbcType="VARCHAR" property="lDesc" />
+    <result column="l_status" jdbcType="INTEGER" property="lStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    l_id, l_name, l_desc, l_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from lab
+    where l_id = #{lId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from lab
+    where l_id = #{lId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="l_id" keyProperty="lId" parameterType="com.example.demo.domain.entity.Lab" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into lab (l_name, l_desc, l_status
+      )
+    values (#{lName,jdbcType=VARCHAR}, #{lDesc,jdbcType=VARCHAR}, #{lStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="l_id" keyProperty="lId" parameterType="com.example.demo.domain.entity.Lab" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into lab
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lName != null">
+        l_name,
+      </if>
+      <if test="lDesc != null">
+        l_desc,
+      </if>
+      <if test="lStatus != null">
+        l_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lName != null">
+        #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lDesc != null">
+        #{lDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lStatus != null">
+        #{lStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.domain.entity.Lab">
+    <!--@mbg.generated-->
+    update lab
+    <set>
+      <if test="lName != null">
+        l_name = #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lDesc != null">
+        l_desc = #{lDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lStatus != null">
+        l_status = #{lStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where l_id = #{lId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.domain.entity.Lab">
+    <!--@mbg.generated-->
+    update lab
+    set l_name = #{lName,jdbcType=VARCHAR},
+      l_desc = #{lDesc,jdbcType=VARCHAR},
+      l_status = #{lStatus,jdbcType=INTEGER}
+    where l_id = #{lId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+   from lab
+   where 1=1
+   LIMIT #{page},#{pageSize};
+  </select>
+  <select id="countAll" resultType="int">
+    select count(1)
+    from lab
+    where 1=1;
+  </select>
+    <update id="updateStatus">
+        update lab
+        set l_status=#{status}
+        where l_id=#{order};
+    </update>
+  <update id="updateLabInfo">
+update lab
+set
+
+  </update>
+</mapper>
