@@ -48,4 +48,23 @@ public class LabService {
     {
         return labMapper.countAll();
     }
+
+    //删除实验室
+    public Integer delLab(Integer id)
+    {
+        return labMapper.deleteByPrimaryKey(id);
+    }
+
+    //修改实验室信息
+    public Integer modLab(Lab lab)
+    {
+        return labMapper.updateByPrimaryKeySelective(lab);
+    }
+
+    //查询
+    public Lab getById(Integer lId)
+    {
+        return labMapper.selectByPrimaryKey(lId);
+    }
+
 }

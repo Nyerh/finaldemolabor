@@ -127,4 +127,21 @@
       l_id = #{lId,jdbcType=INTEGER}
     where e_id = #{eId,jdbcType=INTEGER}
   </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from equipment
+      where 1=1
+      LIMIT #{page},#{pageSize};
+    </select>
+  <select id="countAll" resultType="int">
+    select count(1)
+    from equipment
+    where 1=1;
+  </select>
+  <update id="updateStatus">
+    update equipment
+    set e_status=#{status}
+    where e_id=#{order};
+  </update>
 </mapper>

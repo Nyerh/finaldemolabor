@@ -98,9 +98,4 @@
         set l_status=#{status}
         where l_id=#{order};
     </update>
-  <update id="updateLabInfo">
-update lab
-set
-
-  </update>
 </mapper>
