@@ -24,4 +24,10 @@ public class Student {
     private Integer sSno;
 
     private String sPwd;
+
+    public Student() {
+    }
+
+    public Student(String name, String sex, String stuClass, Integer sno, String col) {
+    }
 }

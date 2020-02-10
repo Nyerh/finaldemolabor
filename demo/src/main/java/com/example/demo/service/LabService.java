@@ -20,22 +20,43 @@ public class LabService {
 
 
     //展示所有实验室状态
-    public List<Lab> showAllLabs(Integer page,Integer pageSize)
+    public List<Lab> showAllLabs(Lab lab,Integer page,Integer pageSize)
     {
         page=(page-1)*pageSize;
-        List<Lab> labs = labMapper.selectAll(page, pageSize);
+        List<Lab> labs = labMapper.selectAll(lab,page, pageSize);
         return labs;
     }
 
     //预约实验室
     public Integer preOrder(Integer labId)
     {
-        if(labId!=2)
+        if(labId!=1)
         {
             return 0;
         }
         return labMapper.updateStatus(labId,2);
     }
+
+    //审核
+    public Integer examOrder(Integer labId)
+    {
+        if(labId!=2)
+        {
+            return 0;
+        }
+        return labMapper.updateStatus(labId,3);
+    }
+
+    //解除预约
+    public Integer returnOrder(Integer labId)
+    {
+        if(labId==1)
+        {
+            return 0;
+        }
+        return labMapper.updateStatus(labId,1);
+    }
+
 
     //添加实验室
     public Integer addLab(Lab lab)

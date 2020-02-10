@@ -1,8 +1,10 @@
 package com.example.demo.domain.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+
 public class Manager {
     private Integer mId;
 

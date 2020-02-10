@@ -19,7 +19,7 @@ public interface LabMapper {
 
     int updateByPrimaryKey(Lab record);
 
-    List<Lab> selectAll(@Param("page") int page, @Param("pageSize")int pageSize);
+    List<Lab> selectAll(@Param("lab") Lab lab,@Param("page") int page, @Param("pageSize")int pageSize);
 
     int countAll();
 

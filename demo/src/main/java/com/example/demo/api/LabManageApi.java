@@ -32,9 +32,18 @@ public class LabManageApi {
     @RequestMapping("showLabs")
     @ApiOperation("展示全部实验室信息")
     public Msg showLabs(@RequestParam(value = "page") Integer page,
-                        @RequestParam(value = "pageSize") Integer pageSize)
+                        @RequestParam(value = "pageSize") Integer pageSize,
+                        @RequestParam(value = "id",required = false) Integer id,
+                        @RequestParam(value = "desc",required = false) String desc,
+                        @RequestParam(value = "name",required = false) String name,
+                        @RequestParam(value = "status",required = false) Integer status)
     {
-        List<Lab> labs = labService.showAllLabs(page, pageSize);
+        Lab lab = new Lab();
+        lab.setLName(name);
+        lab.setLDesc(desc);
+        lab.setLId(id);
+        lab.setLStatus(status);
+        List<Lab> labs = labService.showAllLabs(lab,page, pageSize);
         Integer count = labService.getCount();
         LabDto labDto = new LabDto().setCount(count)
                 .setLabs(labs);
@@ -82,6 +91,44 @@ public class LabManageApi {
                     .build();
         }
         return new Msg().builder().msg("预订成功")
+                .state(STATUS.SUCCESS)
+                .build();
+    }
+
+    @RequestMapping("examOrderLab")
+    @ApiOperation("审核预定")
+    public Msg examOrderLab(@RequestParam(value = "Id") Integer id,
+                           @RequestParam(value = "userId") Integer userId)
+    {
+        //TODO
+        //身份校验
+        Integer i = labService.examOrder(id);
+        if(i==0)
+        {
+            return new Msg().builder().state(STATUS.NUM_ERR)
+                    .msg("审核失败")
+                    .build();
+        }
+        return new Msg().builder().msg("审核成功")
+                .state(STATUS.SUCCESS)
+                .build();
+    }
+
+    @RequestMapping("returnOrderLab")
+    @ApiOperation("解除预约")
+    public Msg returnOrderLab(@RequestParam(value = "Id") Integer id,
+                            @RequestParam(value = "userId") Integer userId)
+    {
+        //TODO
+        //身份校验
+        Integer i = labService.returnOrder(id);
+        if(i==0)
+        {
+            return new Msg().builder().state(STATUS.NUM_ERR)
+                    .msg("解除预约失败")
+                    .build();
+        }
+        return new Msg().builder().msg("解除预约成功")
                 .state(STATUS.SUCCESS)
                 .build();
     }
@@ -144,4 +191,6 @@ public class LabManageApi {
                 .msg("获取成功")
                 .build();
     }
+
+
 }

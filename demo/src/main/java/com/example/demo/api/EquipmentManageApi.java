@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("equipmentManage")
 @Slf4j
-public class equipmentManageApi {
+public class EquipmentManageApi {
 
     @Resource
     EquipmentService equipmentService;
@@ -123,6 +123,32 @@ public class equipmentManageApi {
         return new Msg().builder()
                 .state(STATUS.SUCCESS)
                 .msg("操作成功")
+                .build();
+    }
+
+    @ApiOperation("归还设备")
+    @RequestMapping("returnEquipment")
+    public Msg returnEquip(Integer eId,Integer userId)
+    {
+        Equipment equipmentById = equipmentService.getEquipmentById(eId);
+        if (equipmentById.getEStatus()!=3)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("该设备不允许归还")
+                    .build();
+        }
+        Integer i = equipmentService.modifyEquipmentStatus(eId, 1);
+        if(i==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("操作错误")
+                    .build();
+        }
+        return new Msg().builder()
+                .state(STATUS.NUM_ERR)
+                .msg("归还成功")
                 .build();
     }
 }

@@ -114,4 +114,21 @@
       s_pwd = #{sPwd,jdbcType=VARCHAR}
     where s_id = #{sId,jdbcType=INTEGER}
   </update>
+    <select id="selectByUsername" resultMap="BaseResultMap">
+      select     <include refid="Base_Column_List" />
+   from student
+   where s_name=#{name} and s_pwd=#{password};
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List" />
+   from student
+   where 1=1
+   <if test="stu.SId!=null "> and s_id=#{stu.SId} </if>
+   <if test="stu.SName!=null "> and s_name=#{stu.SName} </if>
+   <if test="stu.SClass!=null "> and ss_class=#{stu.SClass} </if>
+   <if test="stu.SCol!=null "> and s_col=#{stu.SCol} </if>
+   <if test="stu.SSex!=null "> and s_sex=#{stu.SSex} </if>
+   <if test="stu.SSno!=null "> and s_sno=#{stu.SSno} </if>
+     limit #{page},#{pageSize};
+    </select>
 </mapper>

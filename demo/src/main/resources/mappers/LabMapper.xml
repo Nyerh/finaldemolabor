@@ -86,6 +86,10 @@
     <include refid="Base_Column_List" />
    from lab
    where 1=1
+   <if test="lab.LDesc!=null "> and %#{lab.LDesc}% like l_desc </if>
+   <if test="lab.LId!=null "> and l_id=#{lab.LId}</if>
+   <if test="lab.LName!=null "> and l_name=#{lab.LName}</if>
+   <if test="lab.LStatus!=null "> and l_status=#{lab.LStatus}</if>
    LIMIT #{page},#{pageSize};
   </select>
   <select id="countAll" resultType="int">
