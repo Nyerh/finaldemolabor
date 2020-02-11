@@ -25,7 +25,7 @@ public class Student {
 
     private String sPwd;
 
-    public Student() {
+    public Student(Integer id, String name, String sex, String stuClass, Integer sno, String col) {
     }
 
     public Student(String name, String sex, String stuClass, Integer sno, String col) {
