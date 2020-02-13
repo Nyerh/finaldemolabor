@@ -29,12 +29,12 @@ public class ManagerServiece {
     public Integer login(String name,String password)
     {
         Manager manager = new Manager();
-        manager.setMName(name);
-        manager.setMPwd(password);
+        manager.setmName(name);
+        manager.setmPwd(password);
         Manager login = managerMapper.selectByUsername(manager);
         if(login!=null)
         {
-            return login.getMId();
+            return login.getmId();
         }
         return 0;
     }

@@ -5,9 +5,13 @@ import com.example.demo.constant.STATUS;
 import com.example.demo.domain.dto.EquipmentDto;
 import com.example.demo.domain.entity.Equipment;
 import com.example.demo.service.EquipmentService;
+import com.example.demo.service.ManagerServiece;
+import com.example.demo.service.StuService;
+import com.example.demo.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -25,6 +29,12 @@ public class EquipmentManageApi {
 
     @Resource
     EquipmentService equipmentService;
+    @Resource
+    ManagerServiece managerServiece;
+    @Resource
+    TeacherService teacherService;
+    @Resource
+    StuService stuService;
 
 
     @ApiOperation("展示设备列表")
@@ -33,7 +43,9 @@ public class EquipmentManageApi {
     {
         List<Equipment> equipment = equipmentService.showAllEquipments(page, pageSize);
         Integer count = equipmentService.getCount();
-        EquipmentDto equipmentDto = new EquipmentDto().builder().count(count).list(equipment).build();
+        EquipmentDto equipmentDto = new EquipmentDto();
+        equipmentDto.setCount(count);
+        equipmentDto.setList(equipment);
         return new Msg().builder()
                 .items(equipmentDto)
                 .msg("获取成功")
@@ -54,10 +66,18 @@ public class EquipmentManageApi {
 
     @ApiOperation("作废设备")
     @RequestMapping("cancelEquipment")
-    public Msg cancelEquip(Integer eId)
+    public Msg cancelEquip(@RequestParam(value = "eId") Integer eId,
+                           @RequestParam(value = "userId") Integer userId)
     {
         //身份校验
-        //TODO
+        Integer examine = managerServiece.examine(userId);
+        if(examine==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Integer i = equipmentService.modifyEquipmentStatus(eId, 4);
         if(i==0)
         {
@@ -74,12 +94,21 @@ public class EquipmentManageApi {
 
     @ApiOperation("租借设备申请")
     @RequestMapping("orderEquipment")
-    public Msg orderEquip(Integer eId,Integer userId)
+    public Msg orderEquip(@RequestParam(value = "eId") Integer eId,
+                          @RequestParam(value = "userId") Integer userId)
     {
         //身份校验
-        //TODO
+        Integer examine = managerServiece.examine(userId);
+        Integer stuExam = stuService.examine(userId);
+        if(examine==0&&stuExam==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Equipment equipmentById = equipmentService.getEquipmentById(eId);
-        if (1!=equipmentById.getEStatus())
+        if (1!=equipmentById.geteStatus())
         {
             return new Msg().builder()
                     .state(STATUS.NUM_ERR)
@@ -102,10 +131,20 @@ public class EquipmentManageApi {
 
     @ApiOperation("使用设备")
     @RequestMapping("useEquipment")
-    public Msg useEquip(Integer eId,Integer userId)
+    public Msg useEquip(@RequestParam(value = "eId") Integer eId,
+                        @RequestParam(value = "userId") Integer userId)
     {
+        Integer examine = managerServiece.examine(userId);
+        Integer stuExam = stuService.examine(userId);
+        if(examine==0&&stuExam==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Equipment equipmentById = equipmentService.getEquipmentById(eId);
-        if (equipmentById.getEStatus()!=2)
+        if (equipmentById.geteStatus()!=2)
         {
             return new Msg().builder()
                     .state(STATUS.NUM_ERR)
@@ -128,10 +167,20 @@ public class EquipmentManageApi {
 
     @ApiOperation("归还设备")
     @RequestMapping("returnEquipment")
-    public Msg returnEquip(Integer eId,Integer userId)
+    public Msg returnEquip(@RequestParam(value = "eId") Integer eId,
+                           @RequestParam(value = "userId") Integer userId)
     {
+        Integer examine = managerServiece.examine(userId);
+        Integer stuExam = stuService.examine(userId);
+        if(examine==0&&stuExam==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Equipment equipmentById = equipmentService.getEquipmentById(eId);
-        if (equipmentById.getEStatus()!=3)
+        if (equipmentById.geteStatus()!=3)
         {
             return new Msg().builder()
                     .state(STATUS.NUM_ERR)

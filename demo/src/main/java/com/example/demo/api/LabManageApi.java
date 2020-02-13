@@ -7,6 +7,9 @@ import com.example.demo.domain.dto.LabDto;
 import com.example.demo.domain.dto.ModLabDto;
 import com.example.demo.domain.entity.Lab;
 import com.example.demo.service.LabService;
+import com.example.demo.service.ManagerServiece;
+import com.example.demo.service.StuService;
+import com.example.demo.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +30,12 @@ public class LabManageApi {
 
     @Resource
     LabService labService;
+    @Resource
+    ManagerServiece managerServiece;
+    @Resource
+    TeacherService teacherService;
+    @Resource
+    StuService stuService;
 
 
     @RequestMapping("showLabs")
@@ -39,10 +48,10 @@ public class LabManageApi {
                         @RequestParam(value = "status",required = false) Integer status)
     {
         Lab lab = new Lab();
-        lab.setLName(name);
-        lab.setLDesc(desc);
-        lab.setLId(id);
-        lab.setLStatus(status);
+        lab.setlName(name);
+        lab.setlDesc(desc);
+        lab.setlId(id);
+        lab.setlStatus(status);
         List<Lab> labs = labService.showAllLabs(lab,page, pageSize);
         Integer count = labService.getCount();
         LabDto labDto = new LabDto().setCount(count)
@@ -82,7 +91,16 @@ public class LabManageApi {
                            @RequestParam(value = "userId") Integer userId)
     {
         //校验身份
-        //TODO
+        Integer examine = managerServiece.examine(userId);
+        Integer teaExam = teacherService.examine(userId);
+        if(examine==0&&teaExam==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
+
         Integer i = labService.preOrder(id);
         if(i==0)
         {
@@ -100,8 +118,15 @@ public class LabManageApi {
     public Msg examOrderLab(@RequestParam(value = "Id") Integer id,
                            @RequestParam(value = "userId") Integer userId)
     {
-        //TODO
         //身份校验
+        Integer examine = managerServiece.examine(userId);
+        if(examine==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Integer i = labService.examOrder(id);
         if(i==0)
         {
@@ -119,8 +144,16 @@ public class LabManageApi {
     public Msg returnOrderLab(@RequestParam(value = "Id") Integer id,
                             @RequestParam(value = "userId") Integer userId)
     {
-        //TODO
         //身份校验
+        Integer examine = managerServiece.examine(userId);
+        Integer teaExam = teacherService.examine(userId);
+        if(examine==0&&teaExam==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Integer i = labService.returnOrder(id);
         if(i==0)
         {
@@ -140,7 +173,14 @@ public class LabManageApi {
                       @RequestParam(value = "userId") Integer userId)
     {
         //身份校验
-        //TODO
+        Integer examine = managerServiece.examine(userId);
+        if(examine==0)
+        {
+            return new Msg().builder()
+                    .state(STATUS.NUM_ERR)
+                    .msg("权限不足")
+                    .build();
+        }
         Integer i = labService.delLab(id);
         if(i==0)
         {
