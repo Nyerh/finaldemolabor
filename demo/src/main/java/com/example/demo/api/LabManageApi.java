@@ -10,6 +10,8 @@ import com.example.demo.service.LabService;
 import com.example.demo.service.ManagerServiece;
 import com.example.demo.service.StuService;
 import com.example.demo.service.TeacherService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +42,14 @@ public class LabManageApi {
 
     @RequestMapping("showLabs")
     @ApiOperation("展示全部实验室信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "Integer", value = "页数"),
+            @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "展示数"),
+            @ApiImplicitParam(name = "id", dataType = "String", value = "编号"),
+            @ApiImplicitParam(name = "desc", dataType = "String", value = "详情"),
+            @ApiImplicitParam(name = "name", dataType = "String", value = "名字"),
+            @ApiImplicitParam(name = "status", dataType = "Integer", value = "状态"),
+    })
     public Msg showLabs(@RequestParam(value = "page") Integer page,
                         @RequestParam(value = "pageSize") Integer pageSize,
                         @RequestParam(value = "id",required = false) Integer id,
@@ -63,6 +73,14 @@ public class LabManageApi {
 
     @RequestMapping("addLabs")
     @ApiOperation("添加实验室信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "Integer", value = "页数"),
+            @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "展示数"),
+            @ApiImplicitParam(name = "id", dataType = "String", value = "编号"),
+            @ApiImplicitParam(name = "desc", dataType = "String", value = "详情"),
+            @ApiImplicitParam(name = "name", dataType = "String", value = "名字"),
+            @ApiImplicitParam(name = "status", dataType = "Integer", value = "状态"),
+    })
     public Msg addLabs(@RequestBody AddLabDto addLabDto)
     {
         if(addLabDto==null)
