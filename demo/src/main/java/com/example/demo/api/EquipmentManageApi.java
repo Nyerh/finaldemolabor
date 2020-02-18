@@ -8,6 +8,7 @@ import com.example.demo.service.EquipmentService;
 import com.example.demo.service.ManagerServiece;
 import com.example.demo.service.StuService;
 import com.example.demo.service.TeacherService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("equipmentManage")
 @Slf4j
+@Api(description = "设备管理")
 public class EquipmentManageApi {
 
     @Resource

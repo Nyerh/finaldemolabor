@@ -10,6 +10,7 @@ import com.example.demo.service.LabService;
 import com.example.demo.service.ManagerServiece;
 import com.example.demo.service.StuService;
 import com.example.demo.service.TeacherService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("labManage")
 @Slf4j
+@Api(description = "实验室管理")
 public class LabManageApi {
 
     @Resource

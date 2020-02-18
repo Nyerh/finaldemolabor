@@ -1,26 +1,28 @@
-package com.example.demo;
+package com.example.demo.configuration;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.async.DeferredResult;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static springfox.documentation.builders.PathSelectors.regex;
+
 /**
  * @author ：Beatrice
  * @date ：Created in 2020/2/18 15:04
  * @Description:
  */
-@EnableSwagger2
 @Configuration
+@EnableSwagger2
 public class Swagger2Config {
 
-    private boolean enableSwagger=true;
+
 
     @Bean
     public Docket api() {
@@ -28,12 +30,12 @@ public class Swagger2Config {
                 .genericModelSubstitutes(DeferredResult.class)
                 .useDefaultResponseMessages(false)
                 .forCodeGeneration(false)
-                .enable(enableSwagger)
+                .enable(true)
                 .pathMapping("/")
+                .apiInfo(productApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo.api"))
-                .build()
-                .apiInfo(productApiInfo());
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo")) // 拦截的包 路径
+                .build();
     }
 
     private ApiInfo productApiInfo() {
