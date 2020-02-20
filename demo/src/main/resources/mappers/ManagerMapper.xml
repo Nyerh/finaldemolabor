@@ -85,7 +85,7 @@
       select <include refid="Base_Column_List" />
    from manager
    where 1=1
-   <if test="manager.MName!=null"> and m_name=#{manager.MName}</if>
-   <if test="manager.MPwd!=null"> and mm_pwd=#{manager.MPwd}</if>
+   <if test="manager.mName!=null"> and m_name=#{manager.mName}</if>
+   <if test="manager.mPwd!=null"> and m_pwd=#{manager.mPwd}</if>
     </select>
 </mapper>

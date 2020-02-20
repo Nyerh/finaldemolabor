@@ -1,11 +1,12 @@
 package com.example.demo.mapper;
 
 import com.example.demo.domain.entity.Lab;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
-
+@Mapper
 public interface LabMapper {
     int deleteByPrimaryKey(Integer lId);
 

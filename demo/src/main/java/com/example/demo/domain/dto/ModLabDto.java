@@ -1,12 +1,14 @@
 package com.example.demo.domain.dto;
 
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author ：Beatrice
  * @date ：Created in 2020/2/3 20:05
  * @Description:
  */
-
+@Component
 public class ModLabDto {
 
     Integer userId;

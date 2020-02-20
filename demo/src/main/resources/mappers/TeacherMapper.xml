@@ -112,11 +112,11 @@
     select <include refid="Base_Column_List" />
    from teacher
    where 1=1
-   <if test="teacher.TId!=null "> and t_id=#{teacher.TId}</if>
-   <if test="teacher.TCol!=null "> and t_col=#{teacher.TCol}</if>
-   <if test="teacher.TName!=null "> and t_name=#{teacher.TName}</if>
-   <if test="teacher.TTel!=null "> and t_tel=#{teacher.TTel}</if>
-   <if test="teacher.TTno!=null "> and t_tno=#{teacher.TTno}</if>
+   <if test="teacher.tId!=null "> and t_id=#{teacher.tId}</if>
+   <if test="teacher.tCol!=null "> and t_col=#{teacher.tCol}</if>
+   <if test="teacher.tName!=null "> and t_name=#{teacher.tName}</if>
+   <if test="teacher.tTel!=null "> and t_tel=#{teacher.tTel}</if>
+   <if test="teacher.tTno!=null "> and t_tno=#{teacher.tTno}</if>
      limit #{page},#{pageSize}
   </select>
 </mapper>

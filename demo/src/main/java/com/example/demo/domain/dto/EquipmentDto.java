@@ -1,6 +1,7 @@
 package com.example.demo.domain.dto;
 
 import com.example.demo.domain.entity.Equipment;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @date ：Created in 2020/2/3 21:52
  * @Description:
  */
-
+@Component
 public class EquipmentDto {
     Integer count;
     List<Equipment> list;

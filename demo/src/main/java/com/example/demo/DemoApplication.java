@@ -9,10 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@ComponentScan({"com.example.demo.api"
-        ,"com.example.demo.service",
-        "com.example.demo.configuration"})
-@MapperScan("com.example.demo.mapper")
 @EnableTransactionManagement
 public class DemoApplication {
 

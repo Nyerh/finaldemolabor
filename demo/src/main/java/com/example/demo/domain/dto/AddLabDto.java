@@ -2,12 +2,14 @@ package com.example.demo.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 /**
  * @author ：Beatrice
  * @date ：Created in 2020/2/2 20:24
  * @Description:
  */
+@Component
 public class AddLabDto {
     Integer userId;
     String name;

@@ -1,7 +1,9 @@
 package com.example.demo.domain.entity;
 
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Lab {
     private Integer lId;
 
