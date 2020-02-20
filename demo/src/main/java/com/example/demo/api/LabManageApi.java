@@ -42,7 +42,7 @@ public class LabManageApi {
     StuService stuService;
 
 
-    @RequestMapping("showLabs")
+    @GetMapping("showLabs")
     @ApiOperation("展示全部实验室信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "Integer", value = "页数"),
@@ -73,7 +73,7 @@ public class LabManageApi {
                 .setState(STATUS.SUCCESS);
     }
 
-    @RequestMapping("addLabs")
+    @PostMapping("addLabs")
     @ApiOperation("添加实验室信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "Integer", value = "页数"),
@@ -105,7 +105,7 @@ public class LabManageApi {
                 .build();
     }
 
-    @RequestMapping("preOrderLab")
+    @PostMapping("preOrderLab")
     @ApiOperation("预定实验室")
     public Msg preOrderLab(@RequestParam(value = "Id") Integer id,
                            @RequestParam(value = "userId") Integer userId)
@@ -133,7 +133,7 @@ public class LabManageApi {
                 .build();
     }
 
-    @RequestMapping("examOrderLab")
+    @PostMapping("examOrderLab")
     @ApiOperation("审核预定")
     public Msg examOrderLab(@RequestParam(value = "Id") Integer id,
                            @RequestParam(value = "userId") Integer userId)
@@ -159,7 +159,7 @@ public class LabManageApi {
                 .build();
     }
 
-    @RequestMapping("returnOrderLab")
+    @PostMapping("returnOrderLab")
     @ApiOperation("解除预约")
     public Msg returnOrderLab(@RequestParam(value = "Id") Integer id,
                             @RequestParam(value = "userId") Integer userId)
@@ -187,7 +187,7 @@ public class LabManageApi {
     }
 
 
-    @RequestMapping("delLab")
+    @PostMapping("delLab")
     @ApiOperation("删除实验室")
     public Msg delLab(@RequestParam(value = "Id") Integer id,
                       @RequestParam(value = "userId") Integer userId)
@@ -216,7 +216,7 @@ public class LabManageApi {
     }
 
 
-    @RequestMapping("modifyLab")
+    @PostMapping("modifyLab")
     @ApiOperation("修改实验室信息")
     public Msg modLab(@RequestBody ModLabDto modLabDto)
     {
@@ -233,7 +233,7 @@ public class LabManageApi {
         return new Msg().builder().msg("修改信息成功").state(STATUS.SUCCESS).build();
     }
 
-    @RequestMapping("getById")
+    @GetMapping("getById")
     @ApiOperation("根据ID获取目标实验室信息")
     public Msg getLabById(@RequestParam(value = "id") Integer id)
     {

@@ -12,9 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,7 +36,7 @@ public class UserManagerApi {
     StuService stuService;
 
 
-    @RequestMapping("manaLogin")
+    @GetMapping("manaLogin")
     @ApiOperation("管理员登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", dataType = "String", value = "用户名"),
@@ -60,7 +58,7 @@ public class UserManagerApi {
                 .build();
     }
 
-    @RequestMapping("stuLogin")
+    @GetMapping("stuLogin")
     @ApiOperation("学生登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", dataType = "String", value = "用户名"),
@@ -84,7 +82,7 @@ public class UserManagerApi {
     }
 
 
-    @RequestMapping("teacherLogin")
+    @GetMapping("teacherLogin")
     @ApiOperation("教师登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", dataType = "String", value = "用户名"),
@@ -108,7 +106,7 @@ public class UserManagerApi {
     }
 
 
-    @RequestMapping("stuRegister")
+    @PostMapping("stuRegister")
     @ApiOperation("学生注册")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "String", value = "用户名"),
@@ -146,7 +144,7 @@ public class UserManagerApi {
                 .build();
     }
 
-    @RequestMapping("teacherRegister")
+    @PostMapping("teacherRegister")
     @ApiOperation("教师注册")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "String", value = "用户名"),
@@ -182,7 +180,7 @@ public class UserManagerApi {
     }
 
 
-    @RequestMapping("showStudentList")
+    @GetMapping("showStudentList")
     @ApiOperation("学生信息展示")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "String", value = "用户名"),
@@ -221,7 +219,7 @@ public class UserManagerApi {
     }
 
 
-    @RequestMapping("showTeacherList")
+    @GetMapping("showTeacherList")
     @ApiOperation("教师信息展示")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", dataType = "String", value = "用户名"),
@@ -262,7 +260,7 @@ public class UserManagerApi {
     }
 
 
-    @RequestMapping("delStudent")
+    @PostMapping("delStudent")
     @ApiOperation("删除所选学生信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "stuId", dataType = "Integer", value = "学生ID"),
@@ -293,7 +291,7 @@ public class UserManagerApi {
                 .build();
     }
 
-    @RequestMapping("delTeacher")
+    @PostMapping("delTeacher")
     @ApiOperation("删除所选教师信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "teaId", dataType = "Integer", value = "教师ID"),

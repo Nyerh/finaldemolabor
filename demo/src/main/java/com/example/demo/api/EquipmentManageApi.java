@@ -9,11 +9,11 @@ import com.example.demo.service.ManagerServiece;
 import com.example.demo.service.StuService;
 import com.example.demo.service.TeacherService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,8 +40,13 @@ public class EquipmentManageApi {
 
 
     @ApiOperation("展示设备列表")
-    @RequestMapping("showList")
-    public Msg showEquipments(Integer page,Integer pageSize)
+    @GetMapping("showList")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "Integer", value = "页数"),
+            @ApiImplicitParam(name = "pageSize", dataType = "Integer", value = "页面大小"),
+    })
+    public Msg showEquipments(@RequestParam(value = "page") Integer page,
+                              @RequestParam(value = "pageSize") Integer pageSize)
     {
         List<Equipment> equipment = equipmentService.showAllEquipments(page, pageSize);
         Integer count = equipmentService.getCount();
@@ -55,8 +60,11 @@ public class EquipmentManageApi {
     }
 
     @ApiOperation("根据ID查找设备")
-    @RequestMapping("getById")
-    public Msg getEquipById(Integer eId)
+    @GetMapping("getById")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eId", dataType = "Integer", value = "设备id")
+    })
+    public Msg getEquipById(@RequestParam(value = "eId") Integer eId)
     {
         Equipment equipmentById = equipmentService.getEquipmentById(eId);
         return new Msg().builder()
@@ -67,7 +75,11 @@ public class EquipmentManageApi {
     }
 
     @ApiOperation("作废设备")
-    @RequestMapping("cancelEquipment")
+    @PostMapping("cancelEquipment")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eId", dataType = "Integer", value = "设备id"),
+            @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id")
+    })
     public Msg cancelEquip(@RequestParam(value = "eId") Integer eId,
                            @RequestParam(value = "userId") Integer userId)
     {
@@ -96,6 +108,10 @@ public class EquipmentManageApi {
 
     @ApiOperation("租借设备申请")
     @RequestMapping("orderEquipment")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eId", dataType = "Integer", value = "设备id"),
+            @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id")
+    })
     public Msg orderEquip(@RequestParam(value = "eId") Integer eId,
                           @RequestParam(value = "userId") Integer userId)
     {
@@ -132,7 +148,11 @@ public class EquipmentManageApi {
     }
 
     @ApiOperation("使用设备")
-    @RequestMapping("useEquipment")
+    @PostMapping("useEquipment")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eId", dataType = "Integer", value = "设备id"),
+            @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id")
+    })
     public Msg useEquip(@RequestParam(value = "eId") Integer eId,
                         @RequestParam(value = "userId") Integer userId)
     {
@@ -168,7 +188,11 @@ public class EquipmentManageApi {
     }
 
     @ApiOperation("归还设备")
-    @RequestMapping("returnEquipment")
+    @PostMapping("returnEquipment")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eId", dataType = "Integer", value = "设备id"),
+            @ApiImplicitParam(name = "userId", dataType = "Integer", value = "用户id")
+    })
     public Msg returnEquip(@RequestParam(value = "eId") Integer eId,
                            @RequestParam(value = "userId") Integer userId)
     {
